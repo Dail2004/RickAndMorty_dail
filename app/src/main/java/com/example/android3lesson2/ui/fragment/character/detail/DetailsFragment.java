@@ -5,21 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.android3lesson2.R;
-import com.example.android3lesson2.data.base.BaseFragment;
+import com.bumptech.glide.Glide;
+import com.example.android3lesson2.base.BaseFragment;
 import com.example.android3lesson2.databinding.FragmentDetailsBinding;
-import com.example.android3lesson2.model.CharacterModel;
-import com.example.android3lesson2.ui.fragment.character.CharacterViewModel;
 
-import java.util.ArrayList;
+public class DetailsFragment extends BaseFragment<DetailViewModel, FragmentDetailsBinding> {
 
-public class DetailsFragment extends BaseFragment<CharacterViewModel, FragmentDetailsBinding> {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -29,19 +22,35 @@ public class DetailsFragment extends BaseFragment<CharacterViewModel, FragmentDe
     }
 
     @Override
-    protected void setupViews() {
-
-    }
-
-    @Override
     protected void initialize() {
-        viewModel = new ViewModelProvider(this).get(CharacterViewModel.class);
+        viewModel = new ViewModelProvider(this).get(DetailViewModel.class);
     }
 
     @Override
     protected void setupRequests() {
-        viewModel.fetchCharacter().observe(getViewLifecycleOwner(), characterModels -> {
+        viewModel.fetchCharacter(DetailsFragmentArgs.fromBundle(getArguments()).getId());
+    }
 
+    @Override
+    protected void setupObservers() {
+        viewModel.character.observe(getViewLifecycleOwner(), characterModel -> {
+            Glide.with(binding.image)
+                    .load(characterModel.getImage())
+                    .into(binding.image);
+            binding.name.setText(String.valueOf(characterModel.getName()));
+            binding.created.setText(String.valueOf(characterModel.getCreated()));
+            binding.url.setText(String.valueOf(characterModel.getUrl()));
+            binding.type.setText(String.valueOf(characterModel.getType()));
+            binding.species.setText(String.valueOf(characterModel.getSpecies()));
+            binding.status.setText(String.valueOf(characterModel.getStatus()));
+        });
+
+        viewModel.loading.observe(this, loading -> {
+            if (loading) {
+                binding.loading.setVisibility(View.VISIBLE);
+            } else {
+                binding.loading.setVisibility(View.GONE);
+            }
         });
     }
 

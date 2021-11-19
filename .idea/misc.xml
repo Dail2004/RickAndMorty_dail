@@ -4,12 +4,16 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Android3lesson2/app/src/main/res/layout/activity_main.xml" value="0.1094224924012158" />
-        <entry key="..\:/Users/Android3lesson2/app/src/main/res/layout/character_item.xml" value="0.14492753623188406" />
+        <entry key="..\:/Users/Android3lesson2/app/src/main/res/layout/character_item.xml" value="0.25" />
+        <entry key="..\:/Users/Android3lesson2/app/src/main/res/layout/dialog_fragment.xml" value="0.11775362318840579" />
         <entry key="..\:/Users/Android3lesson2/app/src/main/res/layout/episode_item.xml" value="0.13451086956521738" />
         <entry key="..\:/Users/Android3lesson2/app/src/main/res/layout/fragment_character.xml" value="0.25" />
+        <entry key="..\:/Users/Android3lesson2/app/src/main/res/layout/fragment_detail_episode.xml" value="0.11775362318840579" />
         <entry key="..\:/Users/Android3lesson2/app/src/main/res/layout/fragment_details.xml" value="0.14492753623188406" />
+        <entry key="..\:/Users/Android3lesson2/app/src/main/res/layout/fragment_dialog.xml" value="0.11775362318840579" />
         <entry key="..\:/Users/Android3lesson2/app/src/main/res/layout/fragment_episode.xml" value="0.14492753623188406" />
         <entry key="..\:/Users/Android3lesson2/app/src/main/res/layout/fragment_location.xml" value="0.13451086956521738" />
+        <entry key="..\:/Users/Android3lesson2/app/src/main/res/layout/fragment_location_detail.xml" value="0.11775362318840579" />
         <entry key="..\:/Users/Android3lesson2/app/src/main/res/layout/location_item.xml" value="0.13451086956521738" />
         <entry key="..\:/Users/Android3lesson2/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.20925925925925926" />
       </map>

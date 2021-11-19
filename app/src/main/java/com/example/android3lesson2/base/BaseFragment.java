@@ -1,4 +1,4 @@
-package com.example.android3lesson2.data.base;
+package com.example.android3lesson2.base;
 
 import android.os.Bundle;
 import android.view.View;

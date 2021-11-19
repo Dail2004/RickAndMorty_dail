@@ -2,15 +2,13 @@ package com.example.android3lesson2.ui.adapter;
 
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android3lesson2.databinding.LocationItemBinding;
-import com.example.android3lesson2.model.EpisodeModel;
-import com.example.android3lesson2.model.LocationModel;
+import com.example.android3lesson2.dto.model.LocationModel;
 
 import java.util.ArrayList;
 

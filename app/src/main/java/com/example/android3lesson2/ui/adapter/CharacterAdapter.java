@@ -2,6 +2,7 @@ package com.example.android3lesson2.ui.adapter;
 
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -9,18 +10,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.android3lesson2.databinding.CharacterItemBinding;
-import com.example.android3lesson2.model.CharacterModel;
+import com.example.android3lesson2.dto.model.CharacterModel;
 
 import java.util.ArrayList;
 
 public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder> {
     private ArrayList<CharacterModel> list = new ArrayList<>();
+    private OnItemClickListener listener;
 
     @NonNull
     @Override
     public CharacterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new CharacterViewHolder(CharacterItemBinding.inflate(LayoutInflater
-                .from(parent.getContext()), parent, false));
+                .from(parent.getContext()), parent, false), listener);
     }
 
     @Override
@@ -28,9 +30,8 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
         holder.onBind(list.get(position));
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     public void addList(ArrayList<CharacterModel> list) {
-        this.list = list;
+        this.list=list;
         notifyDataSetChanged();
     }
 
@@ -39,11 +40,14 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
         return list.size();
     }
 
-    public class CharacterViewHolder extends RecyclerView.ViewHolder{
+    public static class CharacterViewHolder extends RecyclerView.ViewHolder {
         CharacterItemBinding binding;
-        public CharacterViewHolder(@NonNull CharacterItemBinding binding) {
+        private final OnItemClickListener listener;
+
+        public CharacterViewHolder(@NonNull CharacterItemBinding binding, OnItemClickListener listener) {
             super(binding.getRoot());
             this.binding = binding;
+            this.listener = listener;
         }
 
         public void onBind(CharacterModel item) {
@@ -51,6 +55,23 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
                     .load(item.getImage())
                     .into(binding.titleIm);
             binding.characterName.setText(item.getName());
+
+            binding.getRoot().setOnLongClickListener(v -> {
+                listener.onClickListeners(item.getId());
+                return false;
+            });
+
+            binding.getRoot().setOnClickListener(v -> {
+                listener.onClickListener(item.getId());
+            });
         }
+    }
+    public interface OnItemClickListener {
+        void onClickListener(int id);
+        void onClickListeners(int id);
+    }
+
+    public void setOnClickListener(OnItemClickListener listener){
+        this.listener = listener;
     }
 }

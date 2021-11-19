@@ -5,19 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.android3lesson2.R;
-import com.example.android3lesson2.data.base.BaseFragment;
+import com.example.android3lesson2.base.BaseFragment;
 import com.example.android3lesson2.databinding.FragmentLocationBinding;
-import com.example.android3lesson2.model.LocationModel;
 import com.example.android3lesson2.ui.adapter.LocationAdapter;
-import com.example.android3lesson2.ui.fragment.episode.EpisodeViewModel;
-
-import java.util.ArrayList;
 
 public class LocationFragment extends BaseFragment<LocationViewModel, FragmentLocationBinding> {
     private final LocationAdapter adapter = new LocationAdapter();
@@ -44,6 +37,16 @@ public class LocationFragment extends BaseFragment<LocationViewModel, FragmentLo
     protected void setupRequests() {
         viewModel.fetchLocation().observe(getViewLifecycleOwner(), locationModels -> {
             adapter.addList(locationModels);
+        });
+
+        viewModel.isLoading.observe(this, loading -> {
+            if (loading){
+                binding.loading.setVisibility(View.VISIBLE);
+                binding.recyclerView.setVisibility(View.GONE);
+            }else{
+                binding.loading.setVisibility(View.GONE);
+                binding.recyclerView.setVisibility(View.VISIBLE);
+            }
         });
     }
 

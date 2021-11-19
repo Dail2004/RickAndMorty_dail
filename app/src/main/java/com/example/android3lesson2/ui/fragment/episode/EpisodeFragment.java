@@ -2,20 +2,18 @@ package com.example.android3lesson2.ui.fragment.episode;
 
 import android.os.Bundle;
 
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.android3lesson2.data.base.BaseFragment;
+import com.example.android3lesson2.base.BaseFragment;
 import com.example.android3lesson2.databinding.FragmentEpisodeBinding;
-import com.example.android3lesson2.model.EpisodeModel;
 import com.example.android3lesson2.ui.adapter.EpisodeAdapter;
-
-import java.util.ArrayList;
+import com.example.android3lesson2.ui.fragment.character.CharacterFragmentDirections;
 
 public class EpisodeFragment extends BaseFragment<EpisodeViewModel, FragmentEpisodeBinding> {
     private final EpisodeAdapter adapter = new EpisodeAdapter();
@@ -42,6 +40,25 @@ public class EpisodeFragment extends BaseFragment<EpisodeViewModel, FragmentEpis
     protected void setupRequests() {
         viewModel.fetchEpisode().observe(getViewLifecycleOwner(), episodeModels -> {
             adapter.addList(episodeModels);
+        });
+
+        viewModel.isLoading.observe(this, loading -> {
+            if (loading){
+                binding.loading.setVisibility(View.VISIBLE);
+                binding.recyclerView.setVisibility(View.GONE);
+            }else{
+                binding.loading.setVisibility(View.GONE);
+                binding.recyclerView.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    @Override
+    protected void setupListeners() {
+        adapter.setOnClickListener(id -> {
+            Navigation.findNavController(requireView()).navigate(
+                    EpisodeFragmentDirections.actionGlobalDetailsFragment(id)
+            );
         });
     }
 
