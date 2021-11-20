@@ -2,6 +2,7 @@ package com.example.android3lesson2.ui.adapter;
 
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -13,13 +14,14 @@ import com.example.android3lesson2.dto.model.LocationModel;
 import java.util.ArrayList;
 
 public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.LocationViewHolder> {
-    ArrayList<LocationModel> list = new ArrayList<>();
+    private ArrayList<LocationModel> list = new ArrayList<>();
+    private OnItemClickListener listener;
 
     @NonNull
     @Override
     public LocationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new LocationViewHolder(LocationItemBinding.inflate(LayoutInflater
-                .from(parent.getContext()), parent, false));
+                .from(parent.getContext()), parent, false), listener);
     }
 
     @Override
@@ -39,19 +41,32 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
     }
 
     public class LocationViewHolder extends RecyclerView.ViewHolder {
-        LocationItemBinding binding;
+        private final LocationItemBinding binding;
+        private final OnItemClickListener listener;
 
-        public LocationViewHolder(@NonNull LocationItemBinding binding) {
+        public LocationViewHolder(@NonNull LocationItemBinding binding, OnItemClickListener listener) {
             super(binding.getRoot());
             this.binding = binding;
+            this.listener = listener;
         }
 
-        public void onBind(LocationModel item){
+        public void onBind(LocationModel item) {
             binding.name.setText(item.getName());
-            binding.url.setText(item.getUrl());
             binding.type.setText(item.getType());
-            binding.created.setText(item.getCreated());
-            binding.dimension.setText(item.getDimension());
+            binding.localed.setText(item.getDimension());
+
+            binding.getRoot().setOnClickListener(v -> {
+                listener.onClickListener(item.getId());
+            });
+
         }
+    }
+
+    public interface OnItemClickListener {
+        void onClickListener(int id);
+    }
+
+    public void setOnClickListener(OnItemClickListener listener){
+        this.listener = listener;
     }
 }

@@ -22,7 +22,7 @@ public class EpisodeViewModel extends ViewModel {
 
     public MutableLiveData<ArrayList<EpisodeModel>> fetchEpisode() {
         _Loading.setValue(true);
-        App.episodeApiService.fetchEpisode().enqueue(new Callback<RickAndMortyResponse<EpisodeModel>>() {
+        App.episodeApiService.fetchEpisodes().enqueue(new Callback<RickAndMortyResponse<EpisodeModel>>() {
             @Override
             public void onResponse(@NonNull Call<RickAndMortyResponse<EpisodeModel>> call, @NonNull Response<RickAndMortyResponse<EpisodeModel>> response) {
                 ArrayList<EpisodeModel> episodeModels = response.body().getResult();

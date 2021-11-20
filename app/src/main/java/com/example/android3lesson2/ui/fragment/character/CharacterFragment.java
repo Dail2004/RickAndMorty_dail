@@ -68,9 +68,6 @@ public class CharacterFragment extends BaseFragment<CharacterViewModel, Fragment
             public void onClickListeners(int id) {
                 Navigation.findNavController(requireView()).navigate(
                         DialogFragmentDirections.actionGlobalDialogFragment(id));
-
-                DialogFragment dialogFragment = new DialogFragment();
-                dialogFragment.
             }
         });
     }
@@ -81,3 +78,7 @@ public class CharacterFragment extends BaseFragment<CharacterViewModel, Fragment
         binding = null;
     }
 }
+
+//- Прочитать про обобщения (generics)
+//- Добавить Repository и Base class'ы
+//- Сделать пагинацию

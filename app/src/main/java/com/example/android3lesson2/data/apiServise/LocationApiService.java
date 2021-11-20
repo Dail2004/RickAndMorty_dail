@@ -12,7 +12,7 @@ public interface LocationApiService {
     @GET("api/location")
     Call<RickAndMortyResponse<LocationModel>> fetchLocation();
 
-    @GET("api/location{id}")
+    @GET("api/location/{id}")
     Call<LocationModel> fetchLocations(
             @Path("id") int id
     );

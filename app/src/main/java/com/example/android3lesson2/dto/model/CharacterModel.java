@@ -13,6 +13,24 @@ public class CharacterModel {
     @SerializedName("image")
     private String image;
 
+    @SerializedName("status")
+    private String status;
+
+    @SerializedName("species")
+    private String species;
+
+    @SerializedName("type")
+    private String type;
+
+    @SerializedName("gender")
+    private String gender;
+
+    @SerializedName("url")
+    private String url;
+
+    @SerializedName("created")
+    private String created;
+
     public String getStatus() {
         return status;
     }
@@ -60,24 +78,6 @@ public class CharacterModel {
     public void setCreated(String created) {
         this.created = created;
     }
-
-    @SerializedName("status")
-    private String status;
-
-    @SerializedName("species")
-    private String species;
-
-    @SerializedName("type")
-    private String type;
-
-    @SerializedName("gender")
-    private String gender;
-
-    @SerializedName("url")
-    private String url;
-
-    @SerializedName("created")
-    private String created;
 
     public int getId() {
         return id;

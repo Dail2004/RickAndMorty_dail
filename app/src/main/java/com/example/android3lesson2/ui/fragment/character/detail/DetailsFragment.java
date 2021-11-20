@@ -40,7 +40,6 @@ public class DetailsFragment extends BaseFragment<DetailViewModel, FragmentDetai
             binding.name.setText(String.valueOf(characterModel.getName()));
             binding.created.setText(String.valueOf(characterModel.getCreated()));
             binding.url.setText(String.valueOf(characterModel.getUrl()));
-            binding.type.setText(String.valueOf(characterModel.getType()));
             binding.species.setText(String.valueOf(characterModel.getSpecies()));
             binding.status.setText(String.valueOf(characterModel.getStatus()));
         });

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.android3lesson2.base.BaseFragment;
@@ -47,6 +48,14 @@ public class LocationFragment extends BaseFragment<LocationViewModel, FragmentLo
                 binding.loading.setVisibility(View.GONE);
                 binding.recyclerView.setVisibility(View.VISIBLE);
             }
+        });
+    }
+
+    @Override
+    protected void setupListeners() {
+        adapter.setOnClickListener(id -> {
+            Navigation.findNavController(requireView()).navigate(
+                    LocationFragmentDirections.actionGlobalLocationDetailFragment(id));
         });
     }
 

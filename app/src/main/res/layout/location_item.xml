@@ -3,72 +3,86 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginVertical="10dp">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="10dp"
+    android:background="@color/black"
+    app:cardCornerRadius="15dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/black">
+        <TextView
+            android:id="@+id/location_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:hint="Location name:"
+            android:textColorHint="@color/gray"
+            android:textSize="18dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
-            android:text="The name of the location."
-            android:textColor="@color/black"
+            tools:text="@tools:sample/first_names"
+            android:textColor="@color/white"
             android:textSize="24dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/location_name"/>
+
+        <TextView
+            android:id="@+id/type_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:hint="Type:"
+            android:textColorHint="@color/gray"
+            android:textSize="18dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/name"/>
 
         <TextView
             android:id="@+id/type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
-            android:text="The type of the location."
-            android:textColor="@color/black"
+            tools:text="@tools:sample/first_names"
+            android:textColor="@color/white"
             android:textSize="24dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/name" />
+            app:layout_constraintTop_toBottomOf="@id/type_hint"/>
 
         <TextView
-            android:id="@+id/url"
+            android:id="@+id/located_is_located"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
-            android:text="Link to the location's own endpoint."
-            android:textColor="@color/black"
-            android:textSize="24dp"
+            android:hint="Dimension in which the location is location:"
+            android:textColorHint="@color/gray"
+            android:textSize="18dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/type" />
+            app:layout_constraintTop_toBottomOf="@id/type"/>
 
         <TextView
-            android:id="@+id/created"
+            android:id="@+id/localed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
-            android:text="	Time at which the location was created in the database."
-            android:textColor="@color/black"
+            tools:text="@tools:sample/first_names"
+            android:textColor="@color/white"
             android:textSize="24dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/url"/>
-
-        <TextView
-            android:id="@+id/dimension"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="10dp"
-            android:layout_marginLeft="20dp"
-            android:text="The dimension in which the location is located."
-            android:textColor="@color/black"
-            android:textSize="24dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/created" />
+            app:layout_constraintTop_toBottomOf="@id/located_is_located"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

@@ -1,26 +1,23 @@
 package com.example.android3lesson2.ui.fragment.episode.detail;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.android3lesson2.R;
-import com.example.android3lesson2.base.BaseFragment;
-import com.example.android3lesson2.databinding.FragmentEpisodeBinding;
-import com.example.android3lesson2.ui.fragment.character.detail.DetailViewModel;
-import com.example.android3lesson2.ui.fragment.character.detail.DetailsFragmentArgs;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
-public class DetailEpisodeFragment extends BaseFragment<EpisodeDetailViewModel, FragmentEpisodeBinding> {
+import com.example.android3lesson2.base.BaseFragment;
+import com.example.android3lesson2.databinding.FragmentDetailEpisodeBinding;
+import com.example.android3lesson2.dto.model.EpisodeModel;
+
+public class DetailEpisodeFragment extends BaseFragment<EpisodeDetailViewModel, FragmentDetailEpisodeBinding> {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentEpisodeBinding.inflate(inflater, container, false);
+        binding = FragmentDetailEpisodeBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
@@ -36,10 +33,18 @@ public class DetailEpisodeFragment extends BaseFragment<EpisodeDetailViewModel, 
 
     @Override
     protected void setupObservers() {
+        viewModel.episode.observe(getViewLifecycleOwner(), episodeModel -> {
+            binding.episodeName.setText(String.valueOf(episodeModel.getName()));
+            binding.episode.setText(String.valueOf(episodeModel.getEpisode()));
+            binding.airDate.setText(String.valueOf(episodeModel.getAir_date()));
+            binding.created.setText(String.valueOf(episodeModel.getCreated()));
+            binding.url.setText(String.valueOf(episodeModel.getUrl()));
+        });
+
         viewModel.loading.observe(this, loading -> {
-            if (loading){
+            if (loading) {
                 binding.loading.setVisibility(View.VISIBLE);
-            }else{
+            } else {
                 binding.loading.setVisibility(View.GONE);
             }
         });

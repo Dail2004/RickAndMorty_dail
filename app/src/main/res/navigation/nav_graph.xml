@@ -8,6 +8,15 @@
     <action android:id="@+id/action_global_detailsFragment"
         app:destination="@id/detailsFragment"/>
 
+    <action android:id="@+id/action_global_detailEpisodeFragment"
+        app:destination="@id/detailEpisodeFragment" />
+
+    <action android:id="@+id/action_global_locationDetailFragment"
+        app:destination="@id/locationDetailFragment" />
+
+    <action android:id="@+id/action_global_dialogFragment"
+        app:destination="@id/dialogFragment" />
+
     <fragment
         android:id="@+id/characterFragment"
         android:name="com.example.android3lesson2.ui.fragment.character.CharacterFragment"
@@ -49,8 +58,7 @@
             android:name="id"
             app:argType="integer" />
     </fragment>
-    <action android:id="@+id/action_global_detailEpisodeFragment" app:destination="@id/detailEpisodeFragment" />
-    <action android:id="@+id/action_global_locationDetailFragment" app:destination="@id/locationDetailFragment" />
+
     <fragment
         android:id="@+id/dialogFragment"
         android:name="com.example.android3lesson2.ui.fragment.character.dialog.DialogFragment"
@@ -60,6 +68,5 @@
             android:name="id"
             app:argType="integer" />
     </fragment>
-    <action android:id="@+id/action_global_dialogFragment" app:destination="@id/dialogFragment" />
 
 </navigation>

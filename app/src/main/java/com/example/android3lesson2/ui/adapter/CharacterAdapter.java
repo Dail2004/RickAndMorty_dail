@@ -55,6 +55,8 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
                     .load(item.getImage())
                     .into(binding.titleIm);
             binding.characterName.setText(item.getName());
+            binding.status2.setText(item.getStatus());
+            binding.species.setText(item.getSpecies());
 
             binding.getRoot().setOnLongClickListener(v -> {
                 listener.onClickListeners(item.getId());

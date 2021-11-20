@@ -5,8 +5,6 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.android3lesson2.App;
-import com.example.android3lesson2.dto.RickAndMortyResponse;
-import com.example.android3lesson2.dto.model.CharacterModel;
 import com.example.android3lesson2.dto.model.EpisodeModel;
 
 import retrofit2.Call;
@@ -15,13 +13,13 @@ import retrofit2.Response;
 
 public class EpisodeDetailViewModel extends ViewModel {
     private final MutableLiveData<EpisodeModel> _episode = new MutableLiveData<>();
-    public final LiveData<EpisodeModel> character = _episode;
+    public final LiveData<EpisodeModel> episode = _episode;
     private final MutableLiveData<Boolean> _loading = new MutableLiveData<>();
     public final LiveData<Boolean> loading = _loading;
 
     public void fetchEpisode(int id) {
         _loading.setValue(true);
-        App.episodeApiService.fetchEpisodes(id).enqueue(new Callback<EpisodeModel>() {
+        App.episodeApiService.fetchEpisode(id).enqueue(new Callback<EpisodeModel>() {
             @Override
             public void onResponse(Call<EpisodeModel> call, Response<EpisodeModel> response) {
                 _episode.setValue(response.body());
@@ -35,4 +33,5 @@ public class EpisodeDetailViewModel extends ViewModel {
             }
         });
     }
+
 }

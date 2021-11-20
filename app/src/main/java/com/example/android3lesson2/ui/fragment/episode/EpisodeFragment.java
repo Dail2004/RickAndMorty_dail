@@ -14,6 +14,9 @@ import com.example.android3lesson2.base.BaseFragment;
 import com.example.android3lesson2.databinding.FragmentEpisodeBinding;
 import com.example.android3lesson2.ui.adapter.EpisodeAdapter;
 import com.example.android3lesson2.ui.fragment.character.CharacterFragmentDirections;
+import com.example.android3lesson2.ui.fragment.character.dialog.DialogFragmentDirections;
+import com.example.android3lesson2.ui.fragment.episode.detail.DetailEpisodeFragmentArgs;
+import com.example.android3lesson2.ui.fragment.episode.detail.DetailEpisodeFragmentDirections;
 
 public class EpisodeFragment extends BaseFragment<EpisodeViewModel, FragmentEpisodeBinding> {
     private final EpisodeAdapter adapter = new EpisodeAdapter();
@@ -56,9 +59,14 @@ public class EpisodeFragment extends BaseFragment<EpisodeViewModel, FragmentEpis
     @Override
     protected void setupListeners() {
         adapter.setOnClickListener(id -> {
-            Navigation.findNavController(requireView()).navigate(
-                    EpisodeFragmentDirections.actionGlobalDetailsFragment(id)
-            );
+
+        });
+        adapter.setOnClickListener(new EpisodeAdapter.OnItemClickListeners() {
+            @Override
+            public void onClickListener(int id) {
+                Navigation.findNavController(EpisodeFragment.this.requireView()).navigate(
+                        EpisodeFragmentDirections.actionGlobalDetailEpisodeFragment(id));
+            }
         });
     }
 

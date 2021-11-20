@@ -46,14 +46,13 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.EpisodeV
         public EpisodeViewHolder(@NonNull EpisodeItemBinding binding, OnItemClickListeners listener) {
             super(binding.getRoot());
             this.binding = binding;
+            this.listener = listener;
         }
 
         public void onBind(EpisodeModel item) {
             binding.episodeName.setText(item.getName());
             binding.episode.setText(item.getEpisode());
-//            binding.airDate.setText(item.getAir_date());
-//            binding.url.setText(item.getUrl());
-//            binding.created.setText(item.getCreated());
+            binding.airDate.setText(item.getAir_date());
 
             binding.getRoot().setOnClickListener(v -> {
                 listener.onClickListener(item.getId());

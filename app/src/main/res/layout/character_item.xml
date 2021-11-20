@@ -33,18 +33,43 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@tools:sample/full_names" />
 
-        <TextView
+        <LinearLayout
             android:id="@+id/status"
-            android:layout_marginTop="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:textSize="16dp"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:text="Alive - Human"
             app:layout_constraintLeft_toRightOf="@+id/title_im"
-            app:layout_constraintTop_toBottomOf="@+id/character_name" />
+            app:layout_constraintTop_toBottomOf="@+id/character_name">
+
+            <TextView
+                android:id="@+id/status2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/white"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                tools:text="Alive" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/white"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:text=" - "/>
+
+            <TextView
+                android:id="@+id/species"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/white"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                tools:text="Human " />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/text"
@@ -82,6 +107,7 @@
             app:layout_constraintTop_toBottomOf="@+id/location" />
 
         <TextView
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
