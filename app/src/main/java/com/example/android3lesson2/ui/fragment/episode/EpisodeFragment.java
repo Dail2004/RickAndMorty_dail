@@ -2,9 +2,11 @@ package com.example.android3lesson2.ui.fragment.episode;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +22,7 @@ import com.example.android3lesson2.ui.fragment.episode.detail.DetailEpisodeFragm
 
 public class EpisodeFragment extends BaseFragment<EpisodeViewModel, FragmentEpisodeBinding> {
     private final EpisodeAdapter adapter = new EpisodeAdapter();
+    private final LinearLayoutManager episodeLayoutManager = new LinearLayoutManager(getContext());
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,13 +38,13 @@ public class EpisodeFragment extends BaseFragment<EpisodeViewModel, FragmentEpis
     }
 
     private void setupCharactersRecycler() {
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.recyclerView.setLayoutManager(episodeLayoutManager);
         binding.recyclerView.setAdapter(adapter);
     }
 
     @Override
     protected void setupRequests() {
-        viewModel.fetchEpisode().observe(getViewLifecycleOwner(), episodeModels -> {
+        viewModel.fetchEpisodes().observe(getViewLifecycleOwner(), episodeModels -> {
             adapter.addList(episodeModels);
         });
 
@@ -56,16 +59,32 @@ public class EpisodeFragment extends BaseFragment<EpisodeViewModel, FragmentEpis
         });
     }
 
+    private int visibleItemCount;
+    private int totalItemCount;
+    private int pastVisibleItem;
+
     @Override
     protected void setupListeners() {
         adapter.setOnClickListener(id -> {
-
+            Navigation.findNavController(EpisodeFragment.this.requireView()).navigate(
+                    EpisodeFragmentDirections.actionGlobalDetailEpisodeFragment(id));
         });
-        adapter.setOnClickListener(new EpisodeAdapter.OnItemClickListeners() {
+
+        binding.recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onClickListener(int id) {
-                Navigation.findNavController(EpisodeFragment.this.requireView()).navigate(
-                        EpisodeFragmentDirections.actionGlobalDetailEpisodeFragment(id));
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0) {
+                    visibleItemCount = episodeLayoutManager.getChildCount();
+                    totalItemCount = episodeLayoutManager.getItemCount();
+                    pastVisibleItem = episodeLayoutManager.findFirstVisibleItemPosition();
+                    if ((visibleItemCount + pastVisibleItem) >= totalItemCount) {
+                        viewModel.page++;
+                        viewModel.fetchEpisodes().observe(getViewLifecycleOwner(), characterModels -> {
+                            adapter.addList(characterModels);
+                        });
+                    }
+                }
             }
         });
     }

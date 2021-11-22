@@ -5,9 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android3lesson2.base.BaseFragment;
 import com.example.android3lesson2.databinding.FragmentLocationBinding;
@@ -15,6 +17,7 @@ import com.example.android3lesson2.ui.adapter.LocationAdapter;
 
 public class LocationFragment extends BaseFragment<LocationViewModel, FragmentLocationBinding> {
     private final LocationAdapter adapter = new LocationAdapter();
+    private final LinearLayoutManager locationLayoutManager = new LinearLayoutManager(getContext());
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -30,7 +33,7 @@ public class LocationFragment extends BaseFragment<LocationViewModel, FragmentLo
     }
 
     private void setupCharactersRecycler() {
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.recyclerView.setLayoutManager(locationLayoutManager);
         binding.recyclerView.setAdapter(adapter);
     }
 
@@ -50,6 +53,9 @@ public class LocationFragment extends BaseFragment<LocationViewModel, FragmentLo
             }
         });
     }
+    private int visibleItemCount;
+    private int totalItemCount;
+    private int pastVisibleItem;
 
     @Override
     protected void setupListeners() {
@@ -57,6 +63,25 @@ public class LocationFragment extends BaseFragment<LocationViewModel, FragmentLo
             Navigation.findNavController(requireView()).navigate(
                     LocationFragmentDirections.actionGlobalLocationDetailFragment(id));
         });
+
+        binding.recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0) {
+                    visibleItemCount = locationLayoutManager.getChildCount();
+                    totalItemCount = locationLayoutManager.getItemCount();
+                    pastVisibleItem = locationLayoutManager.findFirstVisibleItemPosition();
+                    if ((visibleItemCount + pastVisibleItem) >= totalItemCount) {
+                        viewModel.page++;
+                        viewModel.fetchLocation().observe(getViewLifecycleOwner(), characterModels -> {
+                            adapter.addList(characterModels);
+                        });
+                    }
+                }
+            }
+        });
+
     }
 
     @Override

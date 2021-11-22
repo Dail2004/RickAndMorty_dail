@@ -31,7 +31,8 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
     }
 
     public void addList(ArrayList<CharacterModel> list) {
-        this.list=list;
+        this.list.clear();
+        this.list.addAll(list);
         notifyDataSetChanged();
     }
 
