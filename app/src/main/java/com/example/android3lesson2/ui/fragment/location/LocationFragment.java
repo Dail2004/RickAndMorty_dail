@@ -17,7 +17,7 @@ import com.example.android3lesson2.ui.adapter.LocationAdapter;
 
 public class LocationFragment extends BaseFragment<LocationViewModel, FragmentLocationBinding> {
     private final LocationAdapter adapter = new LocationAdapter();
-    private final LinearLayoutManager locationLayoutManager = new LinearLayoutManager(getContext());
+    private LinearLayoutManager locationLayoutManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,13 +33,14 @@ public class LocationFragment extends BaseFragment<LocationViewModel, FragmentLo
     }
 
     private void setupCharactersRecycler() {
+        locationLayoutManager = new LinearLayoutManager(getContext());
         binding.recyclerView.setLayoutManager(locationLayoutManager);
         binding.recyclerView.setAdapter(adapter);
     }
 
     @Override
     protected void setupRequests() {
-        viewModel.fetchLocation().observe(getViewLifecycleOwner(), locationModels -> {
+        viewModel.fetchLocations().observe(getViewLifecycleOwner(), locationModels -> {
             adapter.addList(locationModels);
         });
 
@@ -74,9 +75,9 @@ public class LocationFragment extends BaseFragment<LocationViewModel, FragmentLo
                     pastVisibleItem = locationLayoutManager.findFirstVisibleItemPosition();
                     if ((visibleItemCount + pastVisibleItem) >= totalItemCount) {
                         viewModel.page++;
-                        viewModel.fetchLocation().observe(getViewLifecycleOwner(), characterModels -> {
+                        viewModel.fetchLocations().observe(getViewLifecycleOwner(), characterModels -> {
                             adapter.addList(characterModels);
-                        });
+                        }   );
                     }
                 }
             }

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
@@ -33,7 +34,8 @@ public class DetailsFragment extends BaseFragment<DetailViewModel, FragmentDetai
 
     @Override
     protected void setupObservers() {
-        viewModel.character.observe(getViewLifecycleOwner(), characterModel -> {
+        viewModel.fetchCharacter(DetailsFragmentArgs.fromBundle(getArguments()).getId())
+                .observe(getViewLifecycleOwner(), characterModel -> {
             Glide.with(binding.image)
                     .load(characterModel.getImage())
                     .into(binding.image);

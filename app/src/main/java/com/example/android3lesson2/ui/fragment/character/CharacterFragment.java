@@ -19,7 +19,7 @@ import com.example.android3lesson2.ui.fragment.character.dialog.DialogFragmentDi
 public class CharacterFragment extends BaseFragment<CharacterViewModel, FragmentCharacterBinding> {
 
     private final CharacterAdapter adapter = new CharacterAdapter();
-    private final LinearLayoutManager characterLayoutManager = new LinearLayoutManager(getContext());
+    private LinearLayoutManager characterLayoutManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,6 +35,7 @@ public class CharacterFragment extends BaseFragment<CharacterViewModel, Fragment
     }
 
     private void setupCharactersRecycler() {
+        characterLayoutManager = new LinearLayoutManager(getContext());
         binding.recyclerView.setLayoutManager(characterLayoutManager);
         binding.recyclerView.setAdapter(adapter);
     }

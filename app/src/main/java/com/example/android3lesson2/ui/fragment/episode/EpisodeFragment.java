@@ -22,7 +22,7 @@ import com.example.android3lesson2.ui.fragment.episode.detail.DetailEpisodeFragm
 
 public class EpisodeFragment extends BaseFragment<EpisodeViewModel, FragmentEpisodeBinding> {
     private final EpisodeAdapter adapter = new EpisodeAdapter();
-    private final LinearLayoutManager episodeLayoutManager = new LinearLayoutManager(getContext());
+    private LinearLayoutManager episodeLayoutManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,6 +38,7 @@ public class EpisodeFragment extends BaseFragment<EpisodeViewModel, FragmentEpis
     }
 
     private void setupCharactersRecycler() {
+        episodeLayoutManager = new LinearLayoutManager(getContext());
         binding.recyclerView.setLayoutManager(episodeLayoutManager);
         binding.recyclerView.setAdapter(adapter);
     }

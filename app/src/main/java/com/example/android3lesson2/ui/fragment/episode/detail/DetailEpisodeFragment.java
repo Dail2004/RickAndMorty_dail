@@ -5,12 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.android3lesson2.base.BaseFragment;
 import com.example.android3lesson2.databinding.FragmentDetailEpisodeBinding;
-import com.example.android3lesson2.dto.model.EpisodeModel;
 
 public class DetailEpisodeFragment extends BaseFragment<EpisodeDetailViewModel, FragmentDetailEpisodeBinding> {
 
@@ -28,12 +26,12 @@ public class DetailEpisodeFragment extends BaseFragment<EpisodeDetailViewModel, 
 
     @Override
     protected void setupRequests() {
-        viewModel.fetchEpisode(DetailEpisodeFragmentArgs.fromBundle(getArguments()).getId());
+
     }
 
     @Override
     protected void setupObservers() {
-        viewModel.episode.observe(getViewLifecycleOwner(), episodeModel -> {
+        viewModel.fetchEpisode(DetailEpisodeFragmentArgs.fromBundle(getArguments()).getId()).observe(getViewLifecycleOwner(), episodeModel -> {
             binding.episodeName.setText(String.valueOf(episodeModel.getName()));
             binding.episode.setText(String.valueOf(episodeModel.getEpisode()));
             binding.airDate.setText(String.valueOf(episodeModel.getAir_date()));

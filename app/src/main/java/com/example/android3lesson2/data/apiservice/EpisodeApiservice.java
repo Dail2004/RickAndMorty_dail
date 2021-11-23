@@ -1,14 +1,14 @@
-package com.example.android3lesson2.data.apiServise;
+package com.example.android3lesson2.data.apiservice;
 
-import com.example.android3lesson2.dto.model.EpisodeModel;
-import com.example.android3lesson2.dto.RickAndMortyResponse;
+import com.example.android3lesson2.data.network.dto.model.EpisodeModel;
+import com.example.android3lesson2.data.network.dto.RickAndMortyResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-public interface EpisodeApiService {
+public interface EpisodeApiservice {
     @GET("api/episode")
     Call<RickAndMortyResponse<EpisodeModel>> fetchEpisodes(
             @Query("page") int page

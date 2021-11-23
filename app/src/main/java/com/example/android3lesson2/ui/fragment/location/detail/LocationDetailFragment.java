@@ -2,19 +2,14 @@ package com.example.android3lesson2.ui.fragment.location.detail;
 
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.android3lesson2.R;
 import com.example.android3lesson2.base.BaseFragment;
 import com.example.android3lesson2.databinding.FragmentLocationDetailBinding;
-import com.example.android3lesson2.dto.model.LocationModel;
-import com.example.android3lesson2.ui.fragment.location.LocationViewModel;
 
 public class LocationDetailFragment extends BaseFragment<LocationDetailViewModel, FragmentLocationDetailBinding> {
 

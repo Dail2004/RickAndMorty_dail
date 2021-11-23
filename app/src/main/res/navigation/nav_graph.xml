@@ -20,22 +20,22 @@
     <fragment
         android:id="@+id/characterFragment"
         android:name="com.example.android3lesson2.ui.fragment.character.CharacterFragment"
-        android:label="fragment_character"
+        android:label="Character"
         tools:layout="@layout/fragment_character" />
     <fragment
         android:id="@+id/episodeFragment"
         android:name="com.example.android3lesson2.ui.fragment.episode.EpisodeFragment"
-        android:label="fragment_episode"
+        android:label="Episode"
         tools:layout="@layout/fragment_episode" />
     <fragment
         android:id="@+id/locationFragment"
         android:name="com.example.android3lesson2.ui.fragment.location.LocationFragment"
-        android:label="fragment_location"
+        android:label="Location"
         tools:layout="@layout/fragment_location" />
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.example.android3lesson2.ui.fragment.character.detail.DetailsFragment"
-        android:label="fragment_details"
+        android:label="Detail Character"
         tools:layout="@layout/fragment_details" >
         <argument
             android:name="id"
@@ -44,7 +44,7 @@
     <fragment
         android:id="@+id/detailEpisodeFragment"
         android:name="com.example.android3lesson2.ui.fragment.episode.detail.DetailEpisodeFragment"
-        android:label="fragment_detail_episode"
+        android:label="Detail Episode"
         tools:layout="@layout/fragment_detail_episode" >
         <argument android:name="id"
             app:argType="integer" />
@@ -52,7 +52,7 @@
     <fragment
         android:id="@+id/locationDetailFragment"
         android:name="com.example.android3lesson2.ui.fragment.location.detail.LocationDetailFragment"
-        android:label="fragment_location_detail"
+        android:label="Detail Location"
         tools:layout="@layout/fragment_location_detail" >
         <argument
             android:name="id"

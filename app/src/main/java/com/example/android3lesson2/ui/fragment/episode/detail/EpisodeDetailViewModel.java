@@ -5,33 +5,21 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.android3lesson2.App;
-import com.example.android3lesson2.dto.model.EpisodeModel;
+import com.example.android3lesson2.data.network.dto.model.CharacterModel;
+import com.example.android3lesson2.data.network.dto.model.EpisodeModel;
+import com.example.android3lesson2.data.repositorie.EpisodeRepositories;
+import com.example.android3lesson2.data.repositorie.RickAndMortyRepositories;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class EpisodeDetailViewModel extends ViewModel {
-    private final MutableLiveData<EpisodeModel> _episode = new MutableLiveData<>();
-    public final LiveData<EpisodeModel> episode = _episode;
-    private final MutableLiveData<Boolean> _loading = new MutableLiveData<>();
-    public final LiveData<Boolean> loading = _loading;
+    private final EpisodeRepositories repositories = new EpisodeRepositories();
+    public final LiveData<Boolean> loading = repositories._Loading;
 
-    public void fetchEpisode(int id) {
-        _loading.setValue(true);
-        App.episodeApiService.fetchEpisode(id).enqueue(new Callback<EpisodeModel>() {
-            @Override
-            public void onResponse(Call<EpisodeModel> call, Response<EpisodeModel> response) {
-                _episode.setValue(response.body());
-                _loading.setValue(false);
-            }
 
-            @Override
-            public void onFailure(Call<EpisodeModel> call, Throwable t) {
-                _episode.setValue(null);
-                _loading.setValue(false);
-            }
-        });
+    public MutableLiveData<EpisodeModel> fetchEpisode(int id) {
+        return repositories.fetchEpisode(id);
     }
-
 }

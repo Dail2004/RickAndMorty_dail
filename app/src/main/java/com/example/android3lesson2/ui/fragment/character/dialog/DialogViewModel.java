@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.android3lesson2.App;
-import com.example.android3lesson2.dto.model.CharacterModel;
+import com.example.android3lesson2.data.network.dto.model.CharacterModel;
 
 import retrofit2.Call;
 import retrofit2.Callback;

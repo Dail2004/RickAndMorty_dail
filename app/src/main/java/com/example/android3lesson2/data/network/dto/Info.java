@@ -1,4 +1,4 @@
-package com.example.android3lesson2.dto;
+package com.example.android3lesson2.data.network.dto;
 
 import com.google.gson.annotations.SerializedName;
 

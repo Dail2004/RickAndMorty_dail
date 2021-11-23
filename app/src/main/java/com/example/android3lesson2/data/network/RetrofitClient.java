@@ -1,8 +1,8 @@
 package com.example.android3lesson2.data.network;
 
-import com.example.android3lesson2.data.apiServise.CharacterApiService;
-import com.example.android3lesson2.data.apiServise.EpisodeApiService;
-import com.example.android3lesson2.data.apiServise.LocationApiService;
+import com.example.android3lesson2.data.apiservice.CharacterApiservice;
+import com.example.android3lesson2.data.apiservice.EpisodeApiservice;
+import com.example.android3lesson2.data.apiservice.LocationApiservice;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -24,16 +24,16 @@ public class RetrofitClient {
             .client(okHttpClient)
             .build();
 
-    public CharacterApiService provideCharacterApiService() {
-        return retrofit.create(CharacterApiService.class);
+    public CharacterApiservice provideCharacterApiService() {
+        return retrofit.create(CharacterApiservice.class);
     }
 
-    public EpisodeApiService provideEpisodeApiService() {
-        return retrofit.create(EpisodeApiService.class);
+    public EpisodeApiservice provideEpisodeApiService() {
+        return retrofit.create(EpisodeApiservice.class);
     }
 
-    public LocationApiService provideLocationApiService() {
-        return retrofit.create(LocationApiService.class);
+    public LocationApiservice provideLocationApiService() {
+        return retrofit.create(LocationApiservice.class);
     }
 
 }

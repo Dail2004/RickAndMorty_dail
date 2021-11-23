@@ -1,14 +1,14 @@
-package com.example.android3lesson2.data.apiServise;
+package com.example.android3lesson2.data.apiservice;
 
-import com.example.android3lesson2.dto.model.LocationModel;
-import com.example.android3lesson2.dto.RickAndMortyResponse;
+import com.example.android3lesson2.data.network.dto.model.LocationModel;
+import com.example.android3lesson2.data.network.dto.RickAndMortyResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-public interface LocationApiService {
+public interface LocationApiservice {
 
     @GET("api/location")
     Call<RickAndMortyResponse<LocationModel>> fetchLocation(
