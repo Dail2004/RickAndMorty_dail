@@ -14,7 +14,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LocationRepositories {
-    private final MutableLiveData<Boolean> _Loading = new MutableLiveData<>();
+    public final MutableLiveData<Boolean> _Loading = new MutableLiveData<>();
 
     public MutableLiveData<ArrayList<LocationModel>> fetchLocations(int page) {
         MutableLiveData<ArrayList<LocationModel>> data = new MutableLiveData<>();
@@ -36,7 +36,7 @@ public class LocationRepositories {
         return data;
     }
 
-    public void fetchLocation(int id) {
+    public MutableLiveData<LocationModel> fetchLocation(int id) {
         MutableLiveData<LocationModel> _location = new MutableLiveData<>();
         _Loading.setValue(true);
         App.locationApiService.fetchLocations(id).enqueue(new Callback<LocationModel>() {
@@ -52,7 +52,6 @@ public class LocationRepositories {
                 _Loading.setValue(false);
             }
         });
+        return _location;
     }
-
-
 }

@@ -32,7 +32,7 @@ public class LocationDetailFragment extends BaseFragment<LocationDetailViewModel
 
     @Override
     protected void setupObservers() {
-        viewModel.location.observe(getViewLifecycleOwner(), locationModel -> {
+        viewModel.fetchLocation(LocationDetailFragmentArgs.fromBundle(getArguments()).getId()).observe(getViewLifecycleOwner(), locationModel -> {
             binding.name.setText(String.valueOf(locationModel.getName()));
             binding.url.setText(String.valueOf(locationModel.getUrl()));
             binding.type.setText(String.valueOf(locationModel.getType()));
