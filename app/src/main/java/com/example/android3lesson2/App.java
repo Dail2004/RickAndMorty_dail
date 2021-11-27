@@ -2,9 +2,9 @@ package com.example.android3lesson2;
 
 import android.app.Application;
 
-import com.example.android3lesson2.data.apiservice.CharacterApiservice;
-import com.example.android3lesson2.data.apiservice.EpisodeApiservice;
-import com.example.android3lesson2.data.apiservice.LocationApiservice;
+import com.example.android3lesson2.data.network.apiservice.CharacterApiservice;
+import com.example.android3lesson2.data.network.apiservice.EpisodeApiservice;
+import com.example.android3lesson2.data.network.apiservice.LocationApiservice;
 import com.example.android3lesson2.data.network.RetrofitClient;
 
 public class App extends Application {

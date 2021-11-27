@@ -2,6 +2,8 @@ package com.example.android3lesson2.data.network.dto.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Objects;
+
 public class CharacterModel {
 
     @SerializedName("id")
@@ -101,5 +103,18 @@ public class CharacterModel {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CharacterModel that = (CharacterModel) o;
+        return id == that.id && Objects.equals(name, that.name) && Objects.equals(image, that.image) && Objects.equals(status, that.status) && Objects.equals(species, that.species) && Objects.equals(type, that.type) && Objects.equals(gender, that.gender) && Objects.equals(url, that.url) && Objects.equals(created, that.created);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, image, status, species, type, gender, url, created);
     }
 }

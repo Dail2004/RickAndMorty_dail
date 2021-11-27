@@ -1,9 +1,13 @@
 package com.example.android3lesson2.ui.adapter;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -11,10 +15,19 @@ import com.example.android3lesson2.databinding.CharacterItemBinding;
 import com.example.android3lesson2.data.network.dto.model.CharacterModel;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
-public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder> {
+public class CharacterAdapter extends ListAdapter<CharacterModel, CharacterAdapter.CharacterViewHolder> {
     private ArrayList<CharacterModel> list = new ArrayList<>();
     private OnItemClickListener listener;
+
+    public CharacterAdapter(@NonNull DiffUtil.ItemCallback<CharacterModel> diffCallback) {
+        super(diffCallback);
+    }
+
+    public void setOnClickListener(OnItemClickListener listener){
+        this.listener = listener;
+    }
 
     @NonNull
     @Override
@@ -28,8 +41,8 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
         holder.onBind(list.get(position));
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void addList(ArrayList<CharacterModel> list) {
-        this.list.clear();
         this.list.addAll(list);
         notifyDataSetChanged();
     }
@@ -58,7 +71,7 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
             binding.species.setText(item.getSpecies());
 
             binding.getRoot().setOnLongClickListener(v -> {
-                listener.onClickListeners(item.getId());
+                listener.onClickListeners(getAdapterPosition(), item);
                 return false;
             });
 
@@ -69,10 +82,19 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
     }
     public interface OnItemClickListener {
         void onClickListener(int id);
-        void onClickListeners(int id);
+        void onClickListeners(int position, CharacterModel image);
     }
 
-    public void setOnClickListener(OnItemClickListener listener){
-        this.listener = listener;
+    public static class CharacterComparator extends DiffUtil.ItemCallback<CharacterModel> {
+        @Override
+        public boolean areItemsTheSame(@NonNull CharacterModel oldItem, @NonNull CharacterModel newItem) {
+            return oldItem.getId() == newItem.getId();
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull CharacterModel oldItem, @NonNull CharacterModel newItem) {
+            return oldItem == newItem;
+        }
     }
+
 }

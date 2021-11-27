@@ -1,6 +1,9 @@
 package com.example.android3lesson2.ui.fragment.episode;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
@@ -8,17 +11,9 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.example.android3lesson2.base.BaseFragment;
 import com.example.android3lesson2.databinding.FragmentEpisodeBinding;
 import com.example.android3lesson2.ui.adapter.EpisodeAdapter;
-import com.example.android3lesson2.ui.fragment.character.CharacterFragmentDirections;
-import com.example.android3lesson2.ui.fragment.character.dialog.DialogFragmentDirections;
-import com.example.android3lesson2.ui.fragment.episode.detail.DetailEpisodeFragmentArgs;
-import com.example.android3lesson2.ui.fragment.episode.detail.DetailEpisodeFragmentDirections;
 
 public class EpisodeFragment extends BaseFragment<EpisodeViewModel, FragmentEpisodeBinding> {
     private final EpisodeAdapter adapter = new EpisodeAdapter();

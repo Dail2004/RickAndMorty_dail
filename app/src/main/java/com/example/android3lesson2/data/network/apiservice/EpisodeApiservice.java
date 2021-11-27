@@ -1,4 +1,4 @@
-package com.example.android3lesson2.data.apiservice;
+package com.example.android3lesson2.data.network.apiservice;
 
 import com.example.android3lesson2.data.network.dto.model.EpisodeModel;
 import com.example.android3lesson2.data.network.dto.RickAndMortyResponse;
