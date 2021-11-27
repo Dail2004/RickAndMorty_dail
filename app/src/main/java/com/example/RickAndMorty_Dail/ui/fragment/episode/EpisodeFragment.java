@@ -70,7 +70,7 @@ public class EpisodeFragment extends BaseFragment<EpisodeViewModel, FragmentEpis
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                if (dy > 0) {
+                if (recyclerView.canScrollVertically(1) && dy > 0) {
                     visibleItemCount = episodeLayoutManager.getChildCount();
                     totalItemCount = episodeLayoutManager.getItemCount();
                     pastVisibleItem = episodeLayoutManager.findFirstVisibleItemPosition();

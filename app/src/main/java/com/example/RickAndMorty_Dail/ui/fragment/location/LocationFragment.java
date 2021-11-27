@@ -69,7 +69,7 @@ public class LocationFragment extends BaseFragment<LocationViewModel, FragmentLo
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                if (dy > 0) {
+                if (recyclerView.canScrollVertically(1) && dy > 0) {
                     visibleItemCount = locationLayoutManager.getChildCount();
                     totalItemCount = locationLayoutManager.getItemCount();
                     pastVisibleItem = locationLayoutManager.findFirstVisibleItemPosition();
