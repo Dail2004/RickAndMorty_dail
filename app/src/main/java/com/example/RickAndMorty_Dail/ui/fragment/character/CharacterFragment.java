@@ -18,7 +18,7 @@ import com.example.RickAndMorty_Dail.ui.adapter.CharacterAdapter;
 
 public class CharacterFragment extends BaseFragment<CharacterViewModel, FragmentCharacterBinding> {
 
-    private final CharacterAdapter adapter = new CharacterAdapter(new CharacterAdapter.CharacterComparator());
+    private final CharacterAdapter adapter = new CharacterAdapter();
     private LinearLayoutManager characterLayoutManager;
     private int visibleItemCount;
     private int totalItemCount;
