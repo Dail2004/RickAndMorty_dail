@@ -16,7 +16,7 @@
 
     <fragment
         android:id="@+id/characterFragment"
-        android:name="com.example.android3lesson2.ui.fragment.character.CharacterFragment"
+        android:name="com.example.RickAndMorty_Dail.ui.fragment.character.CharacterFragment"
         android:label="Character"
         tools:layout="@layout/fragment_character" >
         <action
@@ -25,17 +25,17 @@
     </fragment>
     <fragment
         android:id="@+id/episodeFragment"
-        android:name="com.example.android3lesson2.ui.fragment.episode.EpisodeFragment"
+        android:name="com.example.RickAndMorty_Dail.ui.fragment.episode.EpisodeFragment"
         android:label="Episode"
         tools:layout="@layout/fragment_episode" />
     <fragment
         android:id="@+id/locationFragment"
-        android:name="com.example.android3lesson2.ui.fragment.location.LocationFragment"
+        android:name="com.example.RickAndMorty_Dail.ui.fragment.location.LocationFragment"
         android:label="Location"
         tools:layout="@layout/fragment_location" />
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.example.android3lesson2.ui.fragment.character.detail.DetailsFragment"
+        android:name="com.example.RickAndMorty_Dail.ui.fragment.character.detail.DetailsFragment"
         android:label="Detail Character"
         tools:layout="@layout/fragment_details" >
         <argument
@@ -44,7 +44,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailEpisodeFragment"
-        android:name="com.example.android3lesson2.ui.fragment.episode.detail.DetailEpisodeFragment"
+        android:name="com.example.RickAndMorty_Dail.ui.fragment.episode.detail.DetailEpisodeFragment"
         android:label="Detail Episode"
         tools:layout="@layout/fragment_detail_episode" >
         <argument android:name="id"
@@ -52,7 +52,7 @@
     </fragment>
     <fragment
         android:id="@+id/locationDetailFragment"
-        android:name="com.example.android3lesson2.ui.fragment.location.detail.LocationDetailFragment"
+        android:name="com.example.RickAndMorty_Dail.ui.fragment.location.detail.LocationDetailFragment"
         android:label="Detail Location"
         tools:layout="@layout/fragment_location_detail" >
         <argument
@@ -62,7 +62,7 @@
 
     <dialog
         android:id="@+id/dialogFragment"
-        android:name="com.example.android3lesson2.ui.fragment.character.dialog.CharacterDialogFragment"
+        android:name="com.example.RickAndMorty_Dail.ui.fragment.character.dialog.CharacterDialogFragment"
         android:label="fragment_dialog"
         tools:layout="@layout/fragment_dialog" >
         <argument
