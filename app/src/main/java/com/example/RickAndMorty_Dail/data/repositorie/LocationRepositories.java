@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.RickAndMorty_Dail.App;
 import com.example.RickAndMorty_Dail.data.network.dto.RickAndMortyResponse;
-import com.example.RickAndMorty_Dail.data.network.dto.model.LocationModel;
+import com.example.RickAndMorty_Dail.data.network.dto.LocationModel;
 
 import java.util.ArrayList;
 
@@ -22,9 +22,11 @@ public class LocationRepositories {
         App.locationApiService.fetchLocation(page).enqueue(new Callback<RickAndMortyResponse<LocationModel>>() {
             @Override
             public void onResponse(@NonNull Call<RickAndMortyResponse<LocationModel>> call, @NonNull Response<RickAndMortyResponse<LocationModel>> response) {
-                ArrayList<LocationModel> episodeModels = response.body().getResult();
-                data.setValue(episodeModels);
-                _Loading.setValue(false);
+                if (response.body() != null){
+                    ArrayList<LocationModel> episodeModels = response.body().getResult();
+                    data.setValue(episodeModels);
+                    _Loading.setValue(false);
+                }
             }
 
             @Override

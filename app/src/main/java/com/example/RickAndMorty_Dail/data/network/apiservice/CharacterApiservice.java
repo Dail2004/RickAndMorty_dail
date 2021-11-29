@@ -1,6 +1,6 @@
 package com.example.RickAndMorty_Dail.data.network.apiservice;
 
-import com.example.RickAndMorty_Dail.data.network.dto.model.CharacterModel;
+import com.example.RickAndMorty_Dail.data.network.dto.CharacterModel;
 import com.example.RickAndMorty_Dail.data.network.dto.RickAndMortyResponse;
 
 import retrofit2.Call;

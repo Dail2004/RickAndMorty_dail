@@ -1,20 +1,25 @@
 package com.example.RickAndMorty_Dail.ui.adapter;
 
-import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.RickAndMorty_Dail.data.network.dto.EpisodeModel;
 import com.example.RickAndMorty_Dail.databinding.EpisodeItemBinding;
-import com.example.RickAndMorty_Dail.data.network.dto.model.EpisodeModel;
 
 import java.util.ArrayList;
 
-public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.EpisodeViewHolder> {
+public class EpisodeAdapter extends ListAdapter<EpisodeModel, EpisodeAdapter.EpisodeViewHolder> {
     private ArrayList<EpisodeModel> list = new ArrayList<>();
     private OnItemClickListeners listener;
+
+    public EpisodeAdapter(@NonNull DiffUtil.ItemCallback<EpisodeModel> diffCallback) {
+        super(diffCallback);
+    }
 
     @NonNull
     @Override
@@ -25,18 +30,7 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.EpisodeV
 
     @Override
     public void onBindViewHolder(@NonNull EpisodeViewHolder holder, int position) {
-        holder.onBind(list.get(position));
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    public void addList(ArrayList<EpisodeModel> list) {
-        this.list = list;
-        notifyDataSetChanged();
-    }
-
-    @Override
-    public int getItemCount() {
-        return list.size();
+        holder.onBind(getItem(position));
     }
 
     public class EpisodeViewHolder extends RecyclerView.ViewHolder {
@@ -63,7 +57,20 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.EpisodeV
         void onClickListener(int id);
     }
 
-    public void setOnClickListener(OnItemClickListeners listener){
+    public void setOnClickListener(OnItemClickListeners listener) {
         this.listener = listener;
+    }
+
+    public static class EpisodeComparator extends DiffUtil.ItemCallback<EpisodeModel> {
+
+        @Override
+        public boolean areItemsTheSame(@NonNull EpisodeModel oldItem, @NonNull EpisodeModel newItem) {
+            return oldItem.getId() == newItem.getId();
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull EpisodeModel oldItem, @NonNull EpisodeModel newItem) {
+            return oldItem.equals(newItem);
+        }
     }
 }

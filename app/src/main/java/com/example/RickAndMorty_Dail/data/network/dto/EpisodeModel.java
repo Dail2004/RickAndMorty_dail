@@ -1,6 +1,8 @@
-package com.example.RickAndMorty_Dail.data.network.dto.model;
+package com.example.RickAndMorty_Dail.data.network.dto;
 
 import com.google.gson.annotations.SerializedName;
+
+import java.util.Objects;
 
 public class EpisodeModel {
 
@@ -72,4 +74,16 @@ public class EpisodeModel {
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EpisodeModel that = (EpisodeModel) o;
+        return id == that.id && Objects.equals(name, that.name) && Objects.equals(episode, that.episode) && Objects.equals(air_date, that.air_date) && Objects.equals(url, that.url) && Objects.equals(created, that.created);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, episode, air_date, url, created);
+    }
 }

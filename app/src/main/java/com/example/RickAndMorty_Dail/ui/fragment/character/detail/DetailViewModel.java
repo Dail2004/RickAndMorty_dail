@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.RickAndMorty_Dail.data.network.dto.model.CharacterModel;
+import com.example.RickAndMorty_Dail.data.network.dto.CharacterModel;
 import com.example.RickAndMorty_Dail.data.repositorie.CharactersRepositories;
 
 public class DetailViewModel extends ViewModel {

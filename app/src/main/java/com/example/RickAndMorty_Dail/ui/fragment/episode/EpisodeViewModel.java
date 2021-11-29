@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.RickAndMorty_Dail.data.network.dto.model.EpisodeModel;
+import com.example.RickAndMorty_Dail.data.network.dto.EpisodeModel;
 import com.example.RickAndMorty_Dail.data.repositorie.EpisodeRepositories;
 
 import java.util.ArrayList;

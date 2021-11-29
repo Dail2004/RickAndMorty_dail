@@ -1,25 +1,26 @@
 package com.example.RickAndMorty_Dail.ui.adapter;
 
-import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.AsyncDifferConfig;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.RickAndMorty_Dail.data.network.dto.CharacterModel;
 import com.example.RickAndMorty_Dail.databinding.CharacterItemBinding;
-import com.example.RickAndMorty_Dail.data.network.dto.model.CharacterModel;
 
-import java.util.ArrayList;
-
-public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder> {
-    private final ArrayList<CharacterModel> list = new ArrayList<>();
+public class CharacterAdapter extends ListAdapter<CharacterModel, CharacterAdapter.CharacterViewHolder> {
     private OnItemClickListener listener;
 
-    public void setOnClickListener(OnItemClickListener listener){
+    public CharacterAdapter(@NonNull DiffUtil.ItemCallback<CharacterModel> diffCallback) {
+        super(diffCallback);
+    }
+
+    public void setOnClickListener(OnItemClickListener listener) {
         this.listener = listener;
     }
 
@@ -32,18 +33,7 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
 
     @Override
     public void onBindViewHolder(@NonNull CharacterViewHolder holder, int position) {
-        holder.onBind(list.get(position));
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    public void addList(ArrayList<CharacterModel> list) {
-        this.list.addAll(list);
-        notifyDataSetChanged();
-    }
-
-    @Override
-    public int getItemCount() {
-        return list.size();
+        holder.onBind(getItem(position));
     }
 
     public static class CharacterViewHolder extends RecyclerView.ViewHolder {
@@ -74,9 +64,24 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
             });
         }
     }
+
     public interface OnItemClickListener {
         void onClickListener(int id);
+
         void onClickListeners(int position, CharacterModel image);
+    }
+
+    public static class CharacterComparator extends DiffUtil.ItemCallback<CharacterModel> {
+
+        @Override
+        public boolean areItemsTheSame(@NonNull CharacterModel oldItem, @NonNull CharacterModel newItem) {
+            return oldItem.getId() == newItem.getId();
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull CharacterModel oldItem, @NonNull CharacterModel newItem) {
+            return oldItem.equals(newItem);
+        }
     }
 
 }

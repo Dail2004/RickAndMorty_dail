@@ -1,20 +1,25 @@
 package com.example.RickAndMorty_Dail.ui.adapter;
 
-import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.RickAndMorty_Dail.data.network.dto.LocationModel;
 import com.example.RickAndMorty_Dail.databinding.LocationItemBinding;
-import com.example.RickAndMorty_Dail.data.network.dto.model.LocationModel;
 
 import java.util.ArrayList;
 
-public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.LocationViewHolder> {
+public class LocationAdapter extends ListAdapter<LocationModel, LocationAdapter.LocationViewHolder> {
     private ArrayList<LocationModel> list = new ArrayList<>();
     private OnItemClickListener listener;
+
+    public LocationAdapter(@NonNull DiffUtil.ItemCallback<LocationModel> diffCallback) {
+        super(diffCallback);
+    }
 
     @NonNull
     @Override
@@ -25,18 +30,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
 
     @Override
     public void onBindViewHolder(@NonNull LocationViewHolder holder, int position) {
-        holder.onBind(list.get(position));
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    public void addList(ArrayList<LocationModel> list) {
-        this.list = list;
-        notifyDataSetChanged();
-    }
-
-    @Override
-    public int getItemCount() {
-        return list.size();
+        holder.onBind(getItem(position));
     }
 
     public class LocationViewHolder extends RecyclerView.ViewHolder {
@@ -65,7 +59,20 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
         void onClickListener(int id);
     }
 
-    public void setOnClickListener(OnItemClickListener listener){
+    public void setOnClickListener(OnItemClickListener listener) {
         this.listener = listener;
+    }
+
+    public static class LocationComparator extends DiffUtil.ItemCallback<LocationModel> {
+
+        @Override
+        public boolean areItemsTheSame(@NonNull LocationModel oldItem, @NonNull LocationModel newItem) {
+            return oldItem.getId() == newItem.getId();
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull LocationModel oldItem, @NonNull LocationModel newItem) {
+            return oldItem.equals(newItem);
+        }
     }
 }

@@ -1,6 +1,8 @@
-package com.example.RickAndMorty_Dail.data.network.dto.model;
+package com.example.RickAndMorty_Dail.data.network.dto;
 
 import com.google.gson.annotations.SerializedName;
+
+import java.util.Objects;
 
 public class LocationModel {
     @SerializedName("id")
@@ -71,4 +73,16 @@ public class LocationModel {
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LocationModel that = (LocationModel) o;
+        return id == that.id && Objects.equals(name, that.name) && Objects.equals(type, that.type) && Objects.equals(dimension, that.dimension) && Objects.equals(url, that.url) && Objects.equals(created, that.created);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, type, dimension, url, created);
+    }
 }

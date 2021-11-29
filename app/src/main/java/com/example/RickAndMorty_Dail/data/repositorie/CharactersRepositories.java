@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.RickAndMorty_Dail.App;
 import com.example.RickAndMorty_Dail.data.network.dto.RickAndMortyResponse;
-import com.example.RickAndMorty_Dail.data.network.dto.model.CharacterModel;
+import com.example.RickAndMorty_Dail.data.network.dto.CharacterModel;
 
 import java.util.ArrayList;
 
@@ -23,9 +23,11 @@ public class CharactersRepositories {
         App.characterApiService.fetchCharacters(page).enqueue(new Callback<RickAndMortyResponse<CharacterModel>>() {
             @Override
             public void onResponse(@NonNull Call<RickAndMortyResponse<CharacterModel>> call, @NonNull Response<RickAndMortyResponse<CharacterModel>> response) {
-                ArrayList<CharacterModel> characterModels = response.body().getResult();
-                data.setValue(characterModels);
-                _Loading.setValue(false);
+                if (response.body() != null){
+                    ArrayList<CharacterModel> characterModels = response.body().getResult();
+                    data.setValue(characterModels);
+                    _Loading.setValue(false);
+                }
             }
 
             @Override

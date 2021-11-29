@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.RickAndMorty_Dail.App;
 import com.example.RickAndMorty_Dail.data.network.dto.RickAndMortyResponse;
-import com.example.RickAndMorty_Dail.data.network.dto.model.EpisodeModel;
+import com.example.RickAndMorty_Dail.data.network.dto.EpisodeModel;
 
 import java.util.ArrayList;
 
@@ -22,8 +22,10 @@ public class EpisodeRepositories {
         App.episodeApiService.fetchEpisodes(page).enqueue(new Callback<RickAndMortyResponse<EpisodeModel>>() {
             @Override
             public void onResponse(@NonNull Call<RickAndMortyResponse<EpisodeModel>> call, @NonNull Response<RickAndMortyResponse<EpisodeModel>> response) {
-                ArrayList<EpisodeModel> episodeModels = response.body().getResult();
-                data.setValue(episodeModels);
+                if (response.body() != null) {
+                    ArrayList<EpisodeModel> episodeModels = response.body().getResult();
+                    data.setValue(episodeModels);
+                }
                 _Loading.setValue(false);
             }
 
@@ -42,8 +44,8 @@ public class EpisodeRepositories {
         App.episodeApiService.fetchEpisode(id).enqueue(new Callback<EpisodeModel>() {
             @Override
             public void onResponse(Call<EpisodeModel> call, Response<EpisodeModel> response) {
-                _episode.setValue(response.body());
-                _Loading.setValue(false);
+                    _episode.setValue(response.body());
+                    _Loading.setValue(false);
             }
 
             @Override

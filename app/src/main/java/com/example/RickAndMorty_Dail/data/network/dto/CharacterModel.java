@@ -1,4 +1,4 @@
-package com.example.RickAndMorty_Dail.data.network.dto.model;
+package com.example.RickAndMorty_Dail.data.network.dto;
 
 import com.google.gson.annotations.SerializedName;
 

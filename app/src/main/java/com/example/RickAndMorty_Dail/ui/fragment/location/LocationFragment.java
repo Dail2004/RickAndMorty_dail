@@ -15,8 +15,10 @@ import com.example.RickAndMorty_Dail.base.BaseFragment;
 import com.example.RickAndMorty_Dail.databinding.FragmentLocationBinding;
 import com.example.RickAndMorty_Dail.ui.adapter.LocationAdapter;
 
+import java.util.ArrayList;
+
 public class LocationFragment extends BaseFragment<LocationViewModel, FragmentLocationBinding> {
-    private final LocationAdapter adapter = new LocationAdapter();
+    private final LocationAdapter adapter = new LocationAdapter(new LocationAdapter.LocationComparator());
     private LinearLayoutManager locationLayoutManager;
 
     @Override
@@ -41,7 +43,7 @@ public class LocationFragment extends BaseFragment<LocationViewModel, FragmentLo
     @Override
     protected void setupRequests() {
         viewModel.fetchLocations().observe(getViewLifecycleOwner(), locationModels -> {
-            adapter.addList(locationModels);
+            adapter.submitList(locationModels);
         });
 
         viewModel.isLoading.observe(this, loading -> {
@@ -76,7 +78,9 @@ public class LocationFragment extends BaseFragment<LocationViewModel, FragmentLo
                     if ((visibleItemCount + pastVisibleItem) >= totalItemCount) {
                         viewModel.page++;
                         viewModel.fetchLocations().observe(getViewLifecycleOwner(), characterModels -> {
-                            adapter.addList(characterModels);
+                            ArrayList array = new ArrayList(adapter.getCurrentList());
+                            array.addAll(characterModels);
+                            adapter.submitList(array);
                         }   );
                     }
                 }

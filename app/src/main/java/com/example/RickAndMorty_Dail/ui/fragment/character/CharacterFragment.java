@@ -12,22 +12,26 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.RickAndMorty_Dail.base.BaseFragment;
-import com.example.RickAndMorty_Dail.data.network.dto.model.CharacterModel;
+import com.example.RickAndMorty_Dail.data.network.dto.CharacterModel;
 import com.example.RickAndMorty_Dail.databinding.FragmentCharacterBinding;
 import com.example.RickAndMorty_Dail.ui.adapter.CharacterAdapter;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 public class CharacterFragment extends BaseFragment<CharacterViewModel, FragmentCharacterBinding> {
 
-    private final CharacterAdapter adapter = new CharacterAdapter();
+    private final CharacterAdapter adapter = new CharacterAdapter(new CharacterAdapter.CharacterComparator());
     private LinearLayoutManager characterLayoutManager;
+    private ArrayList<CharacterModel> list = new ArrayList<>();
     private int visibleItemCount;
     private int totalItemCount;
     private int pastVisibleItem;
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentCharacterBinding.inflate(getLayoutInflater());
         return binding.getRoot();
     }
@@ -57,7 +61,9 @@ public class CharacterFragment extends BaseFragment<CharacterViewModel, Fragment
                     if ((visibleItemCount + pastVisibleItem) >= totalItemCount) {
                         viewModel.page++;
                         viewModel.fetchCharacters().observe(getViewLifecycleOwner(), characterModels -> {
-                            adapter.addList(characterModels);
+                            ArrayList array = new ArrayList(adapter.getCurrentList());
+                            array.addAll(characterModels);
+                            adapter.submitList(array);
                         });
                     }
                 }
@@ -68,7 +74,7 @@ public class CharacterFragment extends BaseFragment<CharacterViewModel, Fragment
     @Override
     protected void setupRequests() {
         viewModel.fetchCharacters().observe(getViewLifecycleOwner(), characterModels -> {
-            adapter.addList(characterModels);
+            adapter.submitList(characterModels);
         });
 
         viewModel.isLoading.observe(this, loading -> {
@@ -80,7 +86,6 @@ public class CharacterFragment extends BaseFragment<CharacterViewModel, Fragment
                 binding.recyclerView.setVisibility(View.VISIBLE);
             }
         });
-
     }
 
     @Override
@@ -101,8 +106,6 @@ public class CharacterFragment extends BaseFragment<CharacterViewModel, Fragment
         });
 
     }
-
-
 
     @Override
     public void onDestroyView() {

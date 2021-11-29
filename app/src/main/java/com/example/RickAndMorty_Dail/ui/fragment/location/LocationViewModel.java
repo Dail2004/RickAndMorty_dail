@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.RickAndMorty_Dail.data.repositorie.LocationRepositories;
-import com.example.RickAndMorty_Dail.data.network.dto.model.LocationModel;
+import com.example.RickAndMorty_Dail.data.network.dto.LocationModel;
 
 import java.util.ArrayList;
 

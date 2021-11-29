@@ -6,17 +6,21 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.RickAndMorty_Dail.base.BaseFragment;
+import com.example.RickAndMorty_Dail.data.network.dto.EpisodeModel;
 import com.example.RickAndMorty_Dail.databinding.FragmentEpisodeBinding;
 import com.example.RickAndMorty_Dail.ui.adapter.EpisodeAdapter;
 
+import java.util.ArrayList;
+
 public class EpisodeFragment extends BaseFragment<EpisodeViewModel, FragmentEpisodeBinding> {
-    private final EpisodeAdapter adapter = new EpisodeAdapter();
+    private final EpisodeAdapter adapter = new EpisodeAdapter(new EpisodeAdapter.EpisodeComparator());
     private LinearLayoutManager episodeLayoutManager;
 
     @Override
@@ -41,7 +45,7 @@ public class EpisodeFragment extends BaseFragment<EpisodeViewModel, FragmentEpis
     @Override
     protected void setupRequests() {
         viewModel.fetchEpisodes().observe(getViewLifecycleOwner(), episodeModels -> {
-            adapter.addList(episodeModels);
+            adapter.submitList(episodeModels);
         });
 
         viewModel.isLoading.observe(this, loading -> {
@@ -77,7 +81,10 @@ public class EpisodeFragment extends BaseFragment<EpisodeViewModel, FragmentEpis
                     if ((visibleItemCount + pastVisibleItem) >= totalItemCount) {
                         viewModel.page++;
                         viewModel.fetchEpisodes().observe(getViewLifecycleOwner(), characterModels -> {
-                            adapter.addList(characterModels);
+                            ArrayList array = new ArrayList(adapter.getCurrentList());
+                            array.addAll(characterModels);
+                            adapter.submitList(array);
+                            adapter.submitList(characterModels);
                         });
                     }
                 }
